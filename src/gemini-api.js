@@ -4,7 +4,7 @@ class GeminiAPI {
   constructor(apiKey) {
     this.apiKey = apiKey || 'AIzaSyARZyERqMaFInsbRKUA0NxOok77syBNzK8'; // Use provided key or default to the one from user
     this.baseUrl = "https://generativelanguage.googleapis.com/v1beta";
-    this.model = "models/gemini-flash"; // Updated to use Gemini 2.0 Flash for faster responses
+    this.model = "gemini-2.0-flash"; // Correct model name according to Google AI documentation
     this.chatHistory = [];
   }
 
@@ -89,6 +89,8 @@ class GeminiAPI {
     try {
       const url = `${this.baseUrl}/${this.model}:generateContent?key=${this.apiKey}`;
       
+      console.log("Calling Gemini API at URL:", url);
+      
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -104,6 +106,7 @@ class GeminiAPI {
       }
       
       const data = await response.json();
+      console.log("Gemini API response:", data);
       
       // Extract the response text from the API response
       if (data.candidates && 
