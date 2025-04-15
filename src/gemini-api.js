@@ -4,7 +4,7 @@ class GeminiAPI {
   constructor(apiKey) {
     this.apiKey = apiKey || 'AIzaSyARZyERqMaFInsbRKUA0NxOok77syBNzK8'; // Use provided key or default to the one from user
     this.baseUrl = "https://generativelanguage.googleapis.com/v1beta";
-    this.model = "models/gemini-1.5-pro-latest";
+    this.model = "models/gemini-flash"; // Updated to use Gemini 2.0 Flash for faster responses
     this.chatHistory = [];
   }
 
