@@ -1,4 +1,5 @@
-// Data Visualization Components for Dental AI Interface
+// Data Visualizer with browser-compatible data loading
+// This version uses hardcoded sample data instead of fetch for GitHub Pages compatibility
 
 class DataVisualizer {
   constructor(containerId) {
@@ -12,8 +13,10 @@ class DataVisualizer {
 
   // Initialize the visualizer
   async initialize() {
-    // Load Chart.js from CDN
-    await this.loadChartJS();
+    // Load Chart.js from CDN if not already loaded
+    if (typeof Chart === 'undefined') {
+      await this.loadChartJS();
+    }
     console.log("Data Visualizer initialized");
     return true;
   }
@@ -21,6 +24,11 @@ class DataVisualizer {
   // Load Chart.js library
   async loadChartJS() {
     return new Promise((resolve, reject) => {
+      if (typeof Chart !== 'undefined') {
+        resolve(true);
+        return;
+      }
+      
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js';
       script.onload = () => resolve(true);
@@ -29,16 +37,167 @@ class DataVisualizer {
     });
   }
 
-  // Load data from JSON files
+  // Load data - using hardcoded sample data for browser compatibility
   async loadData() {
     try {
-      // Load customer satisfaction data
-      const csResponse = await fetch('data/sample/customer_satisfaction.json');
-      this.data.customerSatisfaction = await csResponse.json();
+      // Instead of fetching from files, use hardcoded sample data
+      this.data.customerSatisfaction = {
+        "customer_satisfaction": {
+          "overall_rating": 4.2,
+          "time_period": "March 2025",
+          "total_responses": 156,
+          "categories": {
+            "staff_friendliness": 4.8,
+            "cleanliness": 4.7,
+            "treatment_quality": 4.5,
+            "appointment_scheduling": 4.1,
+            "wait_times": 3.6,
+            "value_for_money": 3.9,
+            "follow_up_care": 4.3
+          },
+          "trend": {
+            "Oct_2024": 3.9,
+            "Nov_2024": 4.0,
+            "Dec_2024": 4.0,
+            "Jan_2025": 4.1,
+            "Feb_2025": 4.1,
+            "Mar_2025": 4.2
+          },
+          "service_breakdown": {
+            "routine_checkup": {
+              "count": 78,
+              "average_rating": 4.4
+            },
+            "cleaning": {
+              "count": 65,
+              "average_rating": 4.5
+            },
+            "fillings": {
+              "count": 32,
+              "average_rating": 4.1
+            },
+            "root_canal": {
+              "count": 12,
+              "average_rating": 3.8
+            },
+            "extraction": {
+              "count": 8,
+              "average_rating": 3.9
+            },
+            "cosmetic_procedures": {
+              "count": 15,
+              "average_rating": 4.6
+            }
+          }
+        }
+      };
       
-      // Load agent performance data
-      const apResponse = await fetch('data/sample/agent_performance.json');
-      this.data.agentPerformance = await apResponse.json();
+      this.data.agentPerformance = {
+        "agent_performance": {
+          "time_period": "March 2025",
+          "total_agents": 8,
+          "overall_metrics": {
+            "average_satisfaction_rating": 4.6,
+            "average_appointment_duration": 43,
+            "appointments_per_day": 12.5,
+            "treatment_success_rate": 97.2
+          },
+          "agents": [
+            {
+              "id": "A001",
+              "name": "Dr. Sarah Johnson",
+              "role": "Senior Dentist",
+              "metrics": {
+                "satisfaction_rating": 4.9,
+                "appointment_duration": 42,
+                "appointments_per_day": 11,
+                "treatment_success_rate": 99.1,
+                "patient_retention": 94.5
+              },
+              "specialties": ["General Dentistry", "Cosmetic Procedures"]
+            },
+            {
+              "id": "A002",
+              "name": "Dr. Michael Chen",
+              "role": "Dentist",
+              "metrics": {
+                "satisfaction_rating": 4.8,
+                "appointment_duration": 40,
+                "appointments_per_day": 12,
+                "treatment_success_rate": 98.5,
+                "patient_retention": 92.1
+              },
+              "specialties": ["Pediatric Dentistry", "Preventive Care"]
+            },
+            {
+              "id": "A003",
+              "name": "Dr. Elena Rodriguez",
+              "role": "Dentist",
+              "metrics": {
+                "satisfaction_rating": 4.7,
+                "appointment_duration": 38,
+                "appointments_per_day": 14,
+                "treatment_success_rate": 97.8,
+                "patient_retention": 90.3
+              },
+              "specialties": ["Endodontics", "Restorative Dentistry"]
+            },
+            {
+              "id": "A004",
+              "name": "Dr. James Wilson",
+              "role": "Associate Dentist",
+              "metrics": {
+                "satisfaction_rating": 4.5,
+                "appointment_duration": 45,
+                "appointments_per_day": 10,
+                "treatment_success_rate": 96.9,
+                "patient_retention": 88.7
+              },
+              "specialties": ["Oral Surgery", "Implants"]
+            }
+          ],
+          "performance_by_time": {
+            "morning": {
+              "average_satisfaction": 4.7,
+              "average_duration": 41
+            },
+            "afternoon": {
+              "average_satisfaction": 4.5,
+              "average_duration": 44
+            },
+            "evening": {
+              "average_satisfaction": 4.6,
+              "average_duration": 42
+            }
+          },
+          "performance_by_procedure": {
+            "routine_checkup": {
+              "average_satisfaction": 4.7,
+              "average_duration": 35
+            },
+            "cleaning": {
+              "average_satisfaction": 4.6,
+              "average_duration": 40
+            },
+            "fillings": {
+              "average_satisfaction": 4.5,
+              "average_duration": 45
+            },
+            "root_canal": {
+              "average_satisfaction": 4.3,
+              "average_duration": 60
+            },
+            "extraction": {
+              "average_satisfaction": 4.4,
+              "average_duration": 50
+            },
+            "cosmetic_procedures": {
+              "average_satisfaction": 4.8,
+              "average_duration": 65
+            }
+          }
+        }
+      };
       
       console.log("Data loaded successfully");
       return true;
@@ -55,19 +214,24 @@ class DataVisualizer {
       return false;
     }
     
-    // Create customer satisfaction trend chart
-    this.createSatisfactionTrendChart();
-    
-    // Create agent performance comparison chart
-    this.createAgentPerformanceChart();
-    
-    // Create service quality ratings chart
-    this.createServiceQualityChart();
-    
-    // Create time of day performance chart
-    this.createTimeOfDayChart();
-    
-    return true;
+    try {
+      // Create customer satisfaction trend chart
+      this.createSatisfactionTrendChart();
+      
+      // Create agent performance comparison chart
+      this.createAgentPerformanceChart();
+      
+      // Create service quality ratings chart
+      this.createServiceQualityChart();
+      
+      // Create time of day performance chart
+      this.createTimeOfDayChart();
+      
+      return true;
+    } catch (error) {
+      console.error("Error creating visualizations:", error);
+      return false;
+    }
   }
 
   // Create customer satisfaction trend chart
@@ -500,18 +664,6 @@ class DataVisualizer {
     this.container.appendChild(chartContainer);
     
     return canvas.getContext('2d');
-  }
-
-  // Generate placeholder chart images for initial display
-  generatePlaceholderImages() {
-    // This would normally generate actual chart images
-    // For now, we'll just return placeholder URLs
-    return {
-      satisfactionTrend: 'assets/placeholder-chart1.png',
-      agentPerformance: 'assets/placeholder-chart2.png',
-      serviceQuality: 'assets/placeholder-chart3.png',
-      timeOfDay: 'assets/placeholder-chart4.png'
-    };
   }
 
   // Update visualizations based on filter
