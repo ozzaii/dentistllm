@@ -1,0 +1,184 @@
+// Update index.html to use ES modules
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental AI Assistant</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="ri-health-book-fill"></i>
+                    <span>DentalAI</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#" class="nav-link active">Dashboard</a>
+                    <a href="#" class="nav-link">Analytics</a>
+                    <a href="#" class="nav-link">Reports</a>
+                    <a href="#" class="nav-link">Settings</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="chat-container">
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <h2 class="sidebar-title">Data Sources</h2>
+                        <p class="sidebar-subtitle">Select data to analyze</p>
+                    </div>
+                    <div class="data-filters">
+                        <div class="filter-group">
+                            <label class="filter-label">Time Period</label>
+                            <select class="filter-select" id="time-period">
+                                <option value="last-week">Last Week</option>
+                                <option value="last-month" selected>Last Month</option>
+                                <option value="last-quarter">Last Quarter</option>
+                                <option value="last-year">Last Year</option>
+                                <option value="all-time">All Time</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Data Type</label>
+                            <select class="filter-select" id="data-type">
+                                <option value="all" selected>All Data</option>
+                                <option value="customer-satisfaction">Customer Satisfaction</option>
+                                <option value="agent-performance">Agent Performance</option>
+                                <option value="operations">Operations</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="data-sources">
+                        <div class="data-source-item active">
+                            <div class="data-source-name">Customer Satisfaction Survey</div>
+                            <div class="data-source-info">Last updated: Today</div>
+                        </div>
+                        <div class="data-source-item">
+                            <div class="data-source-name">Agent Performance Metrics</div>
+                            <div class="data-source-info">Last updated: Yesterday</div>
+                        </div>
+                        <div class="data-source-item">
+                            <div class="data-source-name">Patient Feedback Analysis</div>
+                            <div class="data-source-info">Last updated: 3 days ago</div>
+                        </div>
+                        <div class="data-source-item">
+                            <div class="data-source-name">Appointment Efficiency</div>
+                            <div class="data-source-info">Last updated: 1 week ago</div>
+                        </div>
+                        <div class="data-source-item">
+                            <div class="data-source-name">Treatment Success Rates</div>
+                            <div class="data-source-info">Last updated: 2 weeks ago</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="chat-interface">
+                    <div class="chat-header">
+                        <h2 class="chat-title">AI Assistant</h2>
+                        <div class="chat-controls">
+                            <button class="control-button tooltip" data-tooltip="Clear Chat">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                            <button class="control-button tooltip active" data-tooltip="Voice Mode">
+                                <i class="ri-volume-up-line"></i>
+                            </button>
+                            <button class="control-button tooltip" data-tooltip="Settings">
+                                <i class="ri-settings-3-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai fade-in">
+                            <div class="message-avatar ai">
+                                <i class="ri-robot-line"></i>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-text">Hello! I'm your dental practice AI assistant. I can help you analyze customer satisfaction data and agent performance metrics. What would you like to know today?</div>
+                                <div class="message-time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <div class="chat-input-wrapper">
+                            <textarea class="chat-input" id="chat-input" placeholder="Ask me about customer satisfaction or agent performance..." rows="1"></textarea>
+                            <div class="input-actions">
+                                <button class="input-action tooltip" data-tooltip="Attach File">
+                                    <i class="ri-attachment-2"></i>
+                                </button>
+                                <button class="input-action tooltip" data-tooltip="Voice Input">
+                                    <i class="ri-mic-line"></i>
+                                </button>
+                            </div>
+                            <button class="send-button" id="send-button">
+                                <span>Send</span>
+                                <i class="ri-send-plane-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="visualization-container" id="visualization-container">
+                <div class="visualization-header">
+                    <h2 class="visualization-title">Performance Visualizations</h2>
+                    <div class="visualization-controls">
+                        <button class="visualization-control active">All</button>
+                        <button class="visualization-control">Satisfaction</button>
+                        <button class="visualization-control">Performance</button>
+                        <button class="visualization-control">Trends</button>
+                    </div>
+                </div>
+                <div class="visualization-grid">
+                    <div class="visualization-card">
+                        <img src="assets/placeholder-chart1.png" alt="Customer Satisfaction Trends" class="visualization-image">
+                        <div class="visualization-info">
+                            <h3 class="visualization-name">Customer Satisfaction Trends</h3>
+                            <p class="visualization-description">Monthly satisfaction scores across all dental services.</p>
+                            <div class="visualization-meta">
+                                <span>Last 6 months</span>
+                                <span>Updated today</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualization-card">
+                        <img src="assets/placeholder-chart2.png" alt="Agent Performance Comparison" class="visualization-image">
+                        <div class="visualization-info">
+                            <h3 class="visualization-name">Agent Performance Comparison</h3>
+                            <p class="visualization-description">Comparative analysis of all dental agents' performance metrics.</p>
+                            <div class="visualization-meta">
+                                <span>Last month</span>
+                                <span>Updated yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualization-card">
+                        <img src="assets/placeholder-chart3.png" alt="Service Quality Ratings" class="visualization-image">
+                        <div class="visualization-info">
+                            <h3 class="visualization-name">Service Quality Ratings</h3>
+                            <p class="visualization-description">Average ratings for different dental services offered.</p>
+                            <div class="visualization-meta">
+                                <span>Last quarter</span>
+                                <span>Updated 3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load scripts as ES modules -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

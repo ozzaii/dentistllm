@@ -1,0 +1,77 @@
+{
+  "customer_satisfaction": {
+    "overall_rating": 4.2,
+    "time_period": "March 2025",
+    "total_responses": 156,
+    "categories": {
+      "staff_friendliness": 4.8,
+      "cleanliness": 4.7,
+      "treatment_quality": 4.5,
+      "appointment_scheduling": 4.1,
+      "wait_times": 3.6,
+      "value_for_money": 3.9,
+      "follow_up_care": 4.3
+    },
+    "trend": {
+      "Oct_2024": 3.9,
+      "Nov_2024": 4.0,
+      "Dec_2024": 4.0,
+      "Jan_2025": 4.1,
+      "Feb_2025": 4.1,
+      "Mar_2025": 4.2
+    },
+    "comments": [
+      {
+        "rating": 5,
+        "comment": "Dr. Johnson was excellent! She explained everything clearly and made me feel at ease.",
+        "date": "2025-03-15"
+      },
+      {
+        "rating": 4,
+        "comment": "Great service but had to wait 20 minutes past my appointment time.",
+        "date": "2025-03-10"
+      },
+      {
+        "rating": 3,
+        "comment": "Treatment was good but prices seem to have increased significantly.",
+        "date": "2025-03-05"
+      },
+      {
+        "rating": 5,
+        "comment": "The new digital scanning technology is amazing! No more uncomfortable molds.",
+        "date": "2025-03-22"
+      },
+      {
+        "rating": 2,
+        "comment": "Waited over 45 minutes and the receptionist wasn't very apologetic about it.",
+        "date": "2025-03-18"
+      }
+    ],
+    "service_breakdown": {
+      "routine_checkup": {
+        "count": 78,
+        "average_rating": 4.4
+      },
+      "cleaning": {
+        "count": 65,
+        "average_rating": 4.5
+      },
+      "fillings": {
+        "count": 32,
+        "average_rating": 4.1
+      },
+      "root_canal": {
+        "count": 12,
+        "average_rating": 3.8
+      },
+      "extraction": {
+        "count": 8,
+        "average_rating": 3.9
+      },
+      "cosmetic_procedures": {
+        "count": 15,
+        "average_rating": 4.6
+      }
+    }
+  }
+}

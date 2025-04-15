@@ -1,0 +1,198 @@
+{
+  "agent_performance": {
+    "time_period": "March 2025",
+    "total_agents": 8,
+    "overall_metrics": {
+      "average_satisfaction_rating": 4.6,
+      "average_appointment_duration": 43,
+      "appointments_per_day": 12.5,
+      "treatment_success_rate": 97.2
+    },
+    "agents": [
+      {
+        "id": "A001",
+        "name": "Dr. Sarah Johnson",
+        "role": "Senior Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.9,
+          "appointment_duration": 42,
+          "appointments_per_day": 11,
+          "treatment_success_rate": 99.1,
+          "patient_retention": 94.5
+        },
+        "specialties": ["General Dentistry", "Cosmetic Procedures"],
+        "comments": [
+          "Excellent chair-side manner and very thorough explanations",
+          "Takes time to answer all patient questions",
+          "Gentle technique with anxious patients"
+        ]
+      },
+      {
+        "id": "A002",
+        "name": "Dr. Michael Chen",
+        "role": "Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.8,
+          "appointment_duration": 40,
+          "appointments_per_day": 12,
+          "treatment_success_rate": 98.5,
+          "patient_retention": 92.1
+        },
+        "specialties": ["Pediatric Dentistry", "Preventive Care"],
+        "comments": [
+          "Great with children and anxious patients",
+          "Very efficient without rushing",
+          "Explains procedures in simple terms"
+        ]
+      },
+      {
+        "id": "A003",
+        "name": "Dr. Elena Rodriguez",
+        "role": "Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.7,
+          "appointment_duration": 38,
+          "appointments_per_day": 14,
+          "treatment_success_rate": 97.8,
+          "patient_retention": 90.3
+        },
+        "specialties": ["Endodontics", "Restorative Dentistry"],
+        "comments": [
+          "Very efficient and skilled with complex procedures",
+          "Excellent pain management",
+          "Could improve on explaining treatment options"
+        ]
+      },
+      {
+        "id": "A004",
+        "name": "Dr. James Wilson",
+        "role": "Associate Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.5,
+          "appointment_duration": 45,
+          "appointments_per_day": 10,
+          "treatment_success_rate": 96.9,
+          "patient_retention": 88.7
+        },
+        "specialties": ["Oral Surgery", "Implants"],
+        "comments": [
+          "Very knowledgeable and skilled surgeon",
+          "Sometimes runs behind schedule",
+          "Excellent follow-up care"
+        ]
+      },
+      {
+        "id": "A005",
+        "name": "Dr. Aisha Patel",
+        "role": "Associate Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.6,
+          "appointment_duration": 44,
+          "appointments_per_day": 11,
+          "treatment_success_rate": 97.5,
+          "patient_retention": 89.2
+        },
+        "specialties": ["Periodontics", "Preventive Care"],
+        "comments": [
+          "Very thorough with examinations",
+          "Great preventive care advice",
+          "Gentle cleaning technique"
+        ]
+      },
+      {
+        "id": "A006",
+        "name": "Dr. Robert Kim",
+        "role": "Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.4,
+          "appointment_duration": 47,
+          "appointments_per_day": 9,
+          "treatment_success_rate": 96.2,
+          "patient_retention": 86.5
+        },
+        "specialties": ["Orthodontics", "Cosmetic Dentistry"],
+        "comments": [
+          "Excellent aesthetic results",
+          "Takes longer than scheduled",
+          "Very detail-oriented"
+        ]
+      },
+      {
+        "id": "A007",
+        "name": "Dr. Lisa Thompson",
+        "role": "Associate Dentist",
+        "metrics": {
+          "satisfaction_rating": 4.3,
+          "appointment_duration": 41,
+          "appointments_per_day": 12,
+          "treatment_success_rate": 95.8,
+          "patient_retention": 85.9
+        },
+        "specialties": ["General Dentistry", "Geriatric Dentistry"],
+        "comments": [
+          "Good with elderly patients",
+          "Clear communication style",
+          "Could improve on pain management"
+        ]
+      },
+      {
+        "id": "A008",
+        "name": "Dr. David Nguyen",
+        "role": "New Associate",
+        "metrics": {
+          "satisfaction_rating": 4.2,
+          "appointment_duration": 50,
+          "appointments_per_day": 8,
+          "treatment_success_rate": 94.5,
+          "patient_retention": 82.1
+        },
+        "specialties": ["General Dentistry"],
+        "comments": [
+          "Still developing efficiency",
+          "Very caring and attentive",
+          "Needs more experience with complex cases"
+        ]
+      }
+    ],
+    "performance_by_time": {
+      "morning": {
+        "average_satisfaction": 4.7,
+        "average_duration": 41
+      },
+      "afternoon": {
+        "average_satisfaction": 4.5,
+        "average_duration": 44
+      },
+      "evening": {
+        "average_satisfaction": 4.6,
+        "average_duration": 42
+      }
+    },
+    "performance_by_procedure": {
+      "routine_checkup": {
+        "average_satisfaction": 4.7,
+        "average_duration": 35
+      },
+      "cleaning": {
+        "average_satisfaction": 4.6,
+        "average_duration": 40
+      },
+      "fillings": {
+        "average_satisfaction": 4.5,
+        "average_duration": 45
+      },
+      "root_canal": {
+        "average_satisfaction": 4.3,
+        "average_duration": 60
+      },
+      "extraction": {
+        "average_satisfaction": 4.4,
+        "average_duration": 50
+      },
+      "cosmetic_procedures": {
+        "average_satisfaction": 4.8,
+        "average_duration": 65
+      }
+    }
+  }
+}
