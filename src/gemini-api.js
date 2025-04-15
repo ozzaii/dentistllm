@@ -5,28 +5,10 @@ class GeminiAPI {
     this.apiKey = apiKey || 'AIzaSyARZyERqMaFInsbRKUA0NxOok77syBNzK8'; // Use provided key or default to the one from user
     this.baseUrl = "https://generativelanguage.googleapis.com/v1beta";
     this.model = "models/gemini-2.0-flash"; // Correct model name with "models/" prefix
-    this.chatHistory = [];
   }
 
   // Initialize the API with context about dental data
   async initialize() {
-    // Add system prompt to provide context about available data
-    this.chatHistory = [{
-      parts: [{
-        text: `You are an AI assistant for a dental practice. You have access to the following data:
-        
-        1. Customer satisfaction data including overall ratings, category breakdowns, trends, and comments
-        2. Agent performance metrics for all dental staff including satisfaction ratings, appointment durations, and success rates
-        3. Visualizations showing trends and comparisons across different metrics
-        
-        Your goal is to provide helpful insights about the dental practice based on this data. Be specific, professional, and concise.
-        When discussing agent performance, focus on positive aspects while noting areas for improvement.
-        When analyzing customer satisfaction, identify trends and suggest potential improvements.
-        
-        The data is current as of March 2025.`
-      }]
-    }];
-    
     console.log("Gemini API initialized with dental context");
     return true;
   }
@@ -50,7 +32,13 @@ class GeminiAPI {
       
       // Prepare the request payload according to the correct format
       const payload = {
-        contents: [userMessage]
+        contents: [userMessage],
+        generationConfig: {
+          temperature: 0.2,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 1024,
+        }
       };
       
       // Make the actual API call to Gemini
@@ -63,20 +51,22 @@ class GeminiAPI {
     }
   }
   
-  // Make an actual API call to Gemini
+  // Make a direct API call to Gemini
   async callGeminiAPI(payload) {
     try {
       // Correct URL format with "models/" prefix
       const url = `${this.baseUrl}/${this.model}:generateContent?key=${this.apiKey}`;
       
       console.log("Calling Gemini API at URL:", url);
-      console.log("Payload:", JSON.stringify(payload, null, 2));
       
+      // Use the fetch API with mode: 'cors' to explicitly enable CORS
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Origin': window.location.origin
         },
+        mode: 'cors', // Explicitly enable CORS
         body: JSON.stringify(payload)
       });
       
@@ -118,7 +108,6 @@ class GeminiAPI {
   
   // Clear chat history
   clearHistory() {
-    this.chatHistory = [];
     return true;
   }
 }
