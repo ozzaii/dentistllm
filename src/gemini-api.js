@@ -4,7 +4,7 @@ class GeminiAPI {
   constructor(apiKey) {
     this.apiKey = apiKey || 'AIzaSyARZyERqMaFInsbRKUA0NxOok77syBNzK8'; // Use provided key or default to the one from user
     this.baseUrl = "https://generativelanguage.googleapis.com/v1beta";
-    this.model = "gemini-2.0-flash"; // Correct model name according to Google AI documentation
+    this.model = "models/gemini-2.0-flash"; // Correct model name with "models/" prefix
     this.chatHistory = [];
   }
 
@@ -12,7 +12,6 @@ class GeminiAPI {
   async initialize() {
     // Add system prompt to provide context about available data
     this.chatHistory = [{
-      role: "system",
       parts: [{
         text: `You are an AI assistant for a dental practice. You have access to the following data:
         
@@ -35,47 +34,27 @@ class GeminiAPI {
   // Process a user message and get a response
   async sendMessage(message, dataContext = null) {
     try {
-      // Add user message to chat history
-      this.chatHistory.push({
-        role: "user",
+      // Create a new request with the user's message
+      const userMessage = {
         parts: [{
           text: message
         }]
-      });
+      };
       
-      // If we have specific data context, add it to the prompt
+      // If we have specific data context, add it to the user message
       if (dataContext) {
-        this.chatHistory.push({
-          role: "system",
-          parts: [{
-            text: `Here is the relevant data for your reference:\n${JSON.stringify(dataContext, null, 2)}`
-          }]
+        userMessage.parts.push({
+          text: `Here is the relevant data for your reference:\n${JSON.stringify(dataContext, null, 2)}`
         });
       }
       
-      // Prepare the request payload
+      // Prepare the request payload according to the correct format
       const payload = {
-        contents: this.chatHistory,
-        generationConfig: {
-          temperature: 0.2,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 1024,
-        }
+        contents: [userMessage]
       };
       
       // Make the actual API call to Gemini
       const response = await this.callGeminiAPI(payload);
-      
-      // Add assistant response to chat history
-      if (response) {
-        this.chatHistory.push({
-          role: "assistant",
-          parts: [{
-            text: response
-          }]
-        });
-      }
       
       return response;
     } catch (error) {
@@ -87,9 +66,11 @@ class GeminiAPI {
   // Make an actual API call to Gemini
   async callGeminiAPI(payload) {
     try {
+      // Correct URL format with "models/" prefix
       const url = `${this.baseUrl}/${this.model}:generateContent?key=${this.apiKey}`;
       
       console.log("Calling Gemini API at URL:", url);
+      console.log("Payload:", JSON.stringify(payload, null, 2));
       
       const response = await fetch(url, {
         method: 'POST',
@@ -100,8 +81,17 @@ class GeminiAPI {
       });
       
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Gemini API error:", errorData);
+        const errorText = await response.text();
+        console.error("Gemini API error status:", response.status, response.statusText);
+        console.error("Error response:", errorText);
+        
+        try {
+          const errorData = JSON.parse(errorText);
+          console.error("Parsed error data:", errorData);
+        } catch (e) {
+          // If parsing fails, we already logged the raw text
+        }
+        
         throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
       }
       
@@ -126,10 +116,9 @@ class GeminiAPI {
     }
   }
   
-  // Clear chat history except for the system prompt
+  // Clear chat history
   clearHistory() {
-    const systemPrompt = this.chatHistory[0];
-    this.chatHistory = [systemPrompt];
+    this.chatHistory = [];
     return true;
   }
 }
