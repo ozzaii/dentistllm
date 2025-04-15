@@ -37,11 +37,16 @@ class DentalAIApp {
     try {
       console.log('Initializing Dental AI Application...');
       
-      // Initialize APIs with API keys from environment variables or config
-      this.geminiAPI = new GeminiAPI(process.env.GEMINI_API_KEY || '');
+      // Initialize APIs with API keys
+      // In a production environment, these would be securely stored
+      // For demo purposes, we're using empty strings
+      const geminiApiKey = ''; // Would be set via secure environment variables in production
+      const elevenLabsApiKey = ''; // Would be set via secure environment variables in production
+      
+      this.geminiAPI = new GeminiAPI(geminiApiKey);
       await this.geminiAPI.initialize();
       
-      this.elevenLabsAPI = new ElevenLabsAPI(process.env.ELEVENLABS_API_KEY || '');
+      this.elevenLabsAPI = new ElevenLabsAPI(elevenLabsApiKey);
       this.elevenLabsAPI.initialize();
       
       // Initialize analytics components
